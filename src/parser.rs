@@ -12,8 +12,14 @@ pub enum Tokens {
     #[token("*")]
     Star,
 
+    #[regex(r">\.<.*")]
+    LineComment,
+
     #[token("\n")]
     Newline,
+
+    #[token(" ")]
+    Whitespace,
 
     #[error]
     Error,
@@ -33,7 +39,10 @@ impl<'a> Lexer<'a> {
         if let Some(token) = next {
             if token == Tokens::Newline {
                 self.position.0 += 1;
-                self.next_token();
+                self.tokens.next();
+            } else if token == Tokens::LineComment {
+                self.position.1 += self.tokens.span().len();
+                self.tokens.next();
             } else {
                 self.position.1 += self.tokens.span().len();
             }
