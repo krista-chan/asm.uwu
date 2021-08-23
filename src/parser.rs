@@ -33,8 +33,9 @@ impl<'a> Lexer<'a> {
         if let Some(token) = next {
             if token == Tokens::Newline {
                 self.position.0 += 1;
+                self.next_token();
             } else {
-                self.position.1 += self.tokens.span().len()
+                self.position.1 += self.tokens.span().len();
             }
 
             Some(Spanned {
