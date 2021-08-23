@@ -12,6 +12,22 @@ pub enum Tokens {
     #[token("*")]
     Star,
 
+    #[token(":")]
+    Colon,
+
+    // Keywords
+    #[token("notices")]
+    Notices,
+
+    #[token("your")]
+    Your,
+
+    #[token("our")]
+    Our,
+
+    #[regex(r"\w")]
+    Identifier,
+
     #[regex(r">\.<.*")]
     LineComment,
 
